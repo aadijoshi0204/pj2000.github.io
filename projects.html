@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Palak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .projects-page { padding-top: var(--nav-h); }
+
+    /* ── Page Header ────────────────────────────── */
+    .page-header {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+
+    .filter-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      border: 1px solid var(--border);
+      background: transparent;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: var(--sans);
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* ── Projects List ──────────────────────────── */
+    .projects-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem 6rem;
+    }
+
+    .projects-intro {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 580px;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    .project-list { list-style: none; }
+
+    .project-item {
+      border-bottom: 1px solid var(--border);
+      transition: opacity 0.3s;
+    }
+    .project-item.hidden { display: none; }
+
+    .project-link {
+      display: grid;
+      grid-template-columns: 4rem 1fr auto auto;
+      align-items: center;
+      gap: 0 2.5rem;
+      padding: 2rem 1rem;
+      cursor: pointer;
+      transition: padding-left 0.4s ease;
+      position: relative;
+    }
+    .project-link:hover { padding-left: 2rem; }
+
+    .project-num {
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-light);
+    }
+
+    .project-info { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      transition: color 0.3s;
+    }
+    .project-link:hover .project-name { color: var(--accent); }
+
+    .project-meta {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .project-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+    }
+
+    .project-year {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-family: var(--serif);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    /* ── Featured Highlight ─────────────────────── */
+    .projects-highlight {
+      padding: 4rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .highlight-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .highlight-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .highlight-img {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+    .highlight-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: filter 0.5s, transform 0.6s;
+    }
+    .highlight-img:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.03);
+    }
+    .highlight-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+    .highlight-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .highlight-text p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 420px;
+    }
+    .highlight-detail {
+      margin-top: 2rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: flex;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .page-header { padding: 4rem 1.5rem 3rem; }
+      .projects-body { padding: 0 1.5rem 4rem; }
+      .projects-highlight { padding: 3rem 1.5rem; }
+      .highlight-grid { grid-template-columns: 1fr; }
+      .project-link { grid-template-columns: 3rem 1fr auto; gap: 0 1.5rem; }
+      .project-tags { display: none; }
+    }
+    @media (max-width: 640px) {
+      .project-link { grid-template-columns: 2.5rem 1fr; }
+      .project-year { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">PJ</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="themes.html">Themes</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrapper projects-page">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-header-inner">
+        <h1 class="page-title reveal">
+          Selected<br><em>Projects</em>
+        </h1>
+        <div class="filter-row reveal" id="filterRow">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="residential">Residential</button>
+          <button class="filter-btn" data-filter="cultural">Cultural</button>
+          <button class="filter-btn" data-filter="public">Public</button>
+          <button class="filter-btn" data-filter="adaptive">Adaptive Reuse</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Featured -->
+    <div class="projects-highlight">
+      <div class="highlight-inner">
+        <p class="highlight-label">Featured Project — 2024</p>
+        <div class="highlight-grid reveal">
+          <div class="highlight-img">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&h=560&fit=crop" alt="Terracotta House"/>
+          </div>
+          <div class="highlight-text">
+            <h2>Terracotta House</h2>
+            <p>A residence in Alibaug that draws its language from the laterite landscape — raw, warm, and deliberately rooted. The project explores the boundary between interior and coastal terrain through a sequence of shaded courtyards and deep verandahs.</p>
+            <div class="highlight-detail">
+              <span>Residential</span>
+              <span>Alibaug, MH</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Body -->
+    <div class="projects-body">
+      <p class="projects-intro reveal">
+        A curated selection of work exploring light, materiality, and spatial experience across scales and typologies.
+      </p>
+
+      <ul class="project-list reveal-stagger" id="projectList">
+
+        <li class="project-item" data-type="residential">
+          <a class="project-link" data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=640&h=420&fit=crop">
+            <span class="project-num">01</span>
+            <div class="project-info">
+              <span class="project-name">Terracotta House</span>
+              <span class="project-meta">Alibaug, Maharashtra</span>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Residential</span>
+            </div>
+            <span class="project-year">2024</span>
+          </a>
+        </li>
+
+        <li class="project-item" data-type="public">
+          <a class="project-link" data-img="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=640&h=420&fit=crop">
+            <span class="project-num">02</span>
+            <div class="project-info">
+              <span class="project-name">Civic Thread Pavilion</span>
+              <span class="project-meta">Mumbai, Maharashtra</span>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Public</span>
+            </div>
+            <span class="project-year">2023</span>
+          </a>
+        </li>
+
+        <li class="project-item" data-type="residential">
+          <a class="project-link" data-img="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=640&h=420&fit=crop">
+            <span class="project-num">03</span>
+            <div class="project-info">
+              <span class="project-name">Stillwater Residence</span>
+              <span class="project-meta">Goa</span>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Residential</span>
+            </div>
+            <span class="project-year">2023</span>
+          </a>
+        </li>
+
+        <li class="project-item" data-type="cultural">
+          <a class="project-link" data-img="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=640&h=420&fit=crop">
+            <span class="project-num">04</span>
+            <div class="project-info">
+              <span class="project-name">Archive of Light</span>
+              <span class="project-meta">Jaipur, Rajasthan</span>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Cultural</span>
+            </div>
+            <span class="project-year">2022</span>
+          </a>
+        </li>
+
+        <li class="project-item" data-type="adaptive">
+          <a class="project-link" data-img="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=640&h=420&fit=crop">
+            <span class="project-num">05</span>
+            <div class="project-info">
+              <span class="project-name">Mill Conversion Lofts</span>
+              <span class="project-meta">Ahmedabad, Gujarat</span>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Adaptive Reuse</span>
+            </div>
+            <span class="project-year">2022</span>
+          </a>
+        </li>
+
+        <li class="project-item" data-type="residential">
+          <a class="project-link" data-img="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=640&h=420&fit=crop">
+            <span class="project-num">06</span>
+            <div class="project-info">
+              <span class="project-name">The Clearing</span>
+              <span class="project-meta">Lonavala, Maharashtra</span>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Landscape</span>
+            </div>
+            <span class="project-year">2021</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>© 2025 Palak Joshi</span>
+      <div class="footer-right">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Floating image -->
+  <div class="project-img-reveal" id="projectImgReveal">
+    <img src="" alt=""/>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Filter logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.project-item').forEach(item => {
+          if (filter === 'all' || item.dataset.type === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

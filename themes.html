@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Themes — Palak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .themes-page { padding-top: var(--nav-h); }
+
+    /* ── Page Header ────────────────────────────── */
+    .page-header {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+
+    /* ── Manifesto Strip ────────────────────────── */
+    .manifesto-strip {
+      background: var(--text);
+      color: var(--bg);
+      padding: 3rem;
+      overflow: hidden;
+    }
+    .manifesto-strip-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .manifesto-mark {
+      font-family: var(--serif);
+      font-size: 6rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+    .manifesto-text {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: rgba(245, 243, 238, 0.85);
+    }
+    .manifesto-text cite {
+      display: block;
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 238, 0.4);
+      margin-top: 1rem;
+    }
+
+    /* ── Themes Body ────────────────────────────── */
+    .themes-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 3rem 6rem;
+    }
+
+    .themes-intro {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      max-width: 580px;
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Theme Items ────────────────────────────── */
+    .theme-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 0 3rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+    .theme-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 0; height: 100%;
+      background: var(--bg-alt);
+      z-index: 0;
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .theme-item:hover::before { width: 100%; }
+    .theme-item > * { position: relative; z-index: 1; }
+
+    .theme-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--border);
+      transition: color 0.3s;
+      padding-top: 0.2rem;
+    }
+    .theme-item:hover .theme-num { color: var(--accent); }
+
+    .theme-body {}
+    .theme-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      transition: color 0.3s;
+    }
+    .theme-item:hover .theme-title { color: var(--accent); }
+
+    .theme-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      max-width: 560px;
+    }
+
+    .theme-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding-top: 0.5rem;
+      text-align: right;
+    }
+    .theme-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    /* ── Theme Elaborations ─────────────────────── */
+    .theme-elaboration {
+      background: var(--bg-alt);
+      padding: 4rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .elaboration-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .elab-card {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .elab-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.8rem;
+    }
+    .elab-word {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+    .elab-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* ── Projects Link ──────────────────────────── */
+    .themes-cta {
+      padding: 4rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .themes-cta p {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+    .cta-link {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.8rem 2rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      transition: all 0.3s;
+    }
+    .cta-link:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .page-header  { padding: 4rem 1.5rem 3rem; }
+      .manifesto-strip { padding: 2rem 1.5rem; }
+      .manifesto-strip-inner { grid-template-columns: 1fr; gap: 1rem; }
+      .manifesto-mark { font-size: 4rem; }
+      .themes-body  { padding: 3rem 1.5rem 4rem; }
+      .theme-item   { grid-template-columns: 60px 1fr; }
+      .theme-tags   { display: none; }
+      .elaboration-inner { grid-template-columns: 1fr 1fr; }
+      .theme-elaboration { padding: 3rem 1.5rem; }
+      .themes-cta   { padding: 3rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .elaboration-inner { grid-template-columns: 1fr; }
+      .theme-item { grid-template-columns: 1fr; }
+      .theme-num { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">PJ</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="themes.html">Themes</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrapper themes-page">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-header-inner">
+        <h1 class="page-title reveal">
+          Design<br><em>Themes</em>
+        </h1>
+      </div>
+    </header>
+
+    <!-- Manifesto -->
+    <div class="manifesto-strip reveal">
+      <div class="manifesto-strip-inner">
+        <div class="manifesto-mark">"</div>
+        <div>
+          <p class="manifesto-text">
+            Architecture should speak of its time and place, but yearn for timelessness.
+          </p>
+          <cite>— Palak Joshi</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- Themes -->
+    <div class="themes-body">
+      <p class="themes-intro reveal">
+        Four recurring preoccupations that run through every project — regardless of scale, program, or site. These are not formal rules but instincts developed through study, travel, and the slow accumulation of built experience.
+      </p>
+
+      <div class="reveal-stagger">
+
+        <div class="theme-item">
+          <div class="theme-num">01</div>
+          <div class="theme-body">
+            <h2 class="theme-title">Light as Material</h2>
+            <p class="theme-desc">
+              Natural light is the most elemental of architectural materials — free, dynamic, and impossible to stockpile. Every project begins with understanding how the sun will move across a site, how a room will feel at six in the morning versus six in the evening. The quality of light shapes atmosphere, defines movement, and makes a space feel alive even when it is empty. I treat it with the same rigor I apply to structure or section.
+            </p>
+          </div>
+          <div class="theme-tags">
+            <span class="theme-tag">Atmosphere</span>
+            <span class="theme-tag">Fenestration</span>
+            <span class="theme-tag">Section</span>
+          </div>
+        </div>
+
+        <div class="theme-item">
+          <div class="theme-num">02</div>
+          <div class="theme-body">
+            <h2 class="theme-title">Vernacular Modernism</h2>
+            <p class="theme-desc">
+              There is a deep intelligence embedded in the way buildings have always been made in a given place — the angle of a roof, the depth of an overhang, the choice of stone. Vernacular architecture is not nostalgia; it is accumulated climatic wisdom. My practice bridges the precision of contemporary design with the material and spatial knowledge that is specific to South Asian building traditions, seeking a modernism that is genuinely rooted.
+            </p>
+          </div>
+          <div class="theme-tags">
+            <span class="theme-tag">Climate</span>
+            <span class="theme-tag">Material</span>
+            <span class="theme-tag">Place</span>
+          </div>
+        </div>
+
+        <div class="theme-item">
+          <div class="theme-num">03</div>
+          <div class="theme-body">
+            <h2 class="theme-title">Thresholds &amp; Transitions</h2>
+            <p class="theme-desc">
+              In Indian architecture, the spaces between inside and outside — the verandah, the courtyard, the jaali screen — are where life actually unfolds. These liminal conditions are not residual space; they are the architecture. I return again and again to the design of thresholds: the moment you move from the street into a building, from a room into a garden, from the collective into the intimate. These transitions are where spatial experience is most intensely felt.
+            </p>
+          </div>
+          <div class="theme-tags">
+            <span class="theme-tag">Courtyard</span>
+            <span class="theme-tag">Sequence</span>
+            <span class="theme-tag">Threshold</span>
+          </div>
+        </div>
+
+        <div class="theme-item">
+          <div class="theme-num">04</div>
+          <div class="theme-body">
+            <h2 class="theme-title">Tectonic Honesty</h2>
+            <p class="theme-desc">
+              How a building is made should be legible in how it looks. Structure, joint, material — these are not embarrassments to be concealed behind cladding but expressions of craft and intention. I am drawn to the exposed brick, the visible beam, the raw-edged stone. Not as a style, but as an ethics: a belief that architecture is most beautiful when it is truthful about its own making.
+            </p>
+          </div>
+          <div class="theme-tags">
+            <span class="theme-tag">Craft</span>
+            <span class="theme-tag">Structure</span>
+            <span class="theme-tag">Honesty</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Elaborations -->
+    <div class="theme-elaboration">
+      <div class="elaboration-inner reveal-stagger">
+        <div class="elab-card">
+          <div class="elab-num">In Practice</div>
+          <div class="elab-word">Restraint</div>
+          <p class="elab-desc">The discipline of not adding more. Every element that remains in a design should be there because it is necessary — or because it is beautiful enough that its presence is justified on those grounds alone.</p>
+        </div>
+        <div class="elab-card">
+          <div class="elab-num">In Method</div>
+          <div class="elab-word">Listening</div>
+          <p class="elab-desc">Before drawing anything, the work of architecture is to listen — to the site, the brief, the climate, the culture. The best buildings feel inevitable, as if the land itself proposed them.</p>
+        </div>
+        <div class="elab-card">
+          <div class="elab-num">In Aspiration</div>
+          <div class="elab-word">Timelessness</div>
+          <p class="elab-desc">To design something that could not have been made at any other time and place, yet does not feel dated the moment the next trend arrives. Quietly extraordinary, rather than loudly contemporary.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="themes-cta reveal">
+      <p>See how these ideas find form in built work.</p>
+      <a href="projects.html" class="cta-link">View Projects →</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>© 2025 Palak Joshi</span>
+      <div class="footer-right">
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
