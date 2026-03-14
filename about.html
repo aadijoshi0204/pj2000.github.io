@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Palak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .about-page {
+      padding-top: var(--nav-h);
+    }
+
+    /* ── Page Header ────────────────────────────── */
+    .page-header {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+      max-width: 100%;
+    }
+    .page-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    .page-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .page-header-meta {
+      text-align: right;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+      line-height: 1.9;
+    }
+
+    /* ── Main Layout ────────────────────────────── */
+    .about-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 3rem 6rem;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ── Portrait Column ────────────────────────── */
+    .portrait-col {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
+    .portrait-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .portrait-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(15%) contrast(1.05);
+      transition: filter 0.5s ease, transform 0.6s ease;
+    }
+    .portrait-wrap:hover img {
+      filter: grayscale(0%) contrast(1);
+      transform: scale(1.02);
+    }
+    .portrait-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border);
+      pointer-events: none;
+    }
+
+    .portrait-info {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+    .portrait-info strong {
+      display: block;
+      font-weight: 400;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.8rem;
+      margin-bottom: 0.2rem;
+    }
+    .portrait-info a {
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .portrait-info a:hover { color: var(--text); }
+
+    /* ── Bio Column ─────────────────────────────── */
+    .bio-col {}
+
+    .bio-head {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 2rem;
+    }
+    .bio-head em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .bio-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      max-width: 620px;
+    }
+
+    .bio-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--text);
+      padding: 1.8rem 0 1.8rem 2rem;
+      border-left: 2px solid var(--accent);
+      margin: 2.5rem 0;
+      max-width: 560px;
+    }
+
+    /* ── CV Sections ────────────────────────────── */
+    .cv-section {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .cv-title {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+    }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0.8rem 2.5rem;
+    }
+
+    .cv-year {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      padding-top: 0.1rem;
+      font-family: var(--serif);
+      font-style: italic;
+    }
+
+    .cv-entry { padding-bottom: 2rem; }
+
+    .cv-entry-title {
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .cv-entry-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .cv-entry-detail {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-style: italic;
+      font-family: var(--serif);
+      margin-top: 0.25rem;
+    }
+
+    /* ── Skills Pills ───────────────────────────── */
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .skill-pill {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem;
+      background: transparent;
+      transition: background 0.3s, color 0.3s;
+    }
+    .skill-pill:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    @media (max-width: 1000px) {
+      .about-main {
+        grid-template-columns: 240px 1fr;
+        gap: 3rem;
+      }
+    }
+    @media (max-width: 780px) {
+      .about-main {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 3rem 1.5rem 4rem;
+      }
+      .portrait-col { position: static; }
+      .portrait-wrap { max-width: 300px; }
+      .page-header { padding: 4rem 1.5rem 3rem; }
+      .page-header-inner { grid-template-columns: 1fr; }
+      .page-header-meta { text-align: left; }
+      .cv-grid { grid-template-columns: 90px 1fr; gap: 0.5rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .cv-grid { grid-template-columns: 1fr; gap: 0.2rem; }
+      .cv-year { padding-bottom: 0; font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">PJ</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="themes.html">Themes</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrapper about-page">
+
+    <!-- Page Header -->
+    <header>
+      <div style="padding: 5rem 3rem 4rem; border-bottom: 1px solid var(--border);">
+        <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr auto; align-items:end; gap:2rem;">
+          <h1 class="page-title reveal">
+            About<br><em>Palak Joshi</em>
+          </h1>
+          <div class="page-header-meta reveal" style="text-align:right;">
+            Architect &amp; IGBC AP<br>
+            Design Freelancer<br>
+            Maharashtra, India
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="about-main">
+
+      <!-- Left: Portrait + Info -->
+      <aside class="portrait-col reveal">
+        <div class="portrait-wrap">
+          <!-- Replace with actual portrait: <img src="pj-photo.jpg" alt="Palak Joshi"/> -->
+          <img src="pj-photo.jpg" alt="Palak Joshi" onerror="this.style.display='none';this.parentElement.style.background='var(--bg-alt)'"/>
+        </div>
+        <div class="portrait-info">
+          <strong>Currently</strong>
+          Junior Architect &amp; Medical Planner<br>
+          Language.Architecture.Body<br>
+          Mumbai Metropolitan Region
+
+          <strong>Education</strong>
+          B.Arch, Aditya College of Architecture<br>
+          University of Mumbai, 2024
+
+          <strong>Certifications</strong>
+          Registered Architect (COA)<br>
+          IGBC Accredited Professional
+
+          <strong>Contact</strong>
+          <a href="mailto:palakjoshi5213@gmail.com">palakjoshi5213@gmail.com</a>
+
+          <strong>Links</strong>
+          <a href="https://www.linkedin.com/in/ar-palak-joshi-b5a830193/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <div class="skills-row" style="margin-top:2rem;">
+          <span class="skill-pill">AutoCAD</span>
+          <span class="skill-pill">Sustainable Design</span>
+          <span class="skill-pill">Adobe InDesign</span>
+          <span class="skill-pill">IGBC</span>
+          <span class="skill-pill">Revit</span>
+          <span class="skill-pill">SketchUp</span>
+          <span class="skill-pill">Photoshop</span>
+          <span class="skill-pill">Microsoft Office</span>
+        </div>
+      </aside>
+
+      <!-- Right: Bio + CV -->
+      <main class="bio-col">
+
+        <div class="reveal">
+          <h2 class="bio-head">
+            Designing spaces with <em>purpose,</em><br>
+            rooted in <em>sustainability</em> and the <em>human experience</em>
+          </h2>
+          <p class="bio-text">
+            I am a registered architect and IGBC Accredited Professional based in Maharashtra, currently working as a Junior Architect and Medical Planner at Language.Architecture.Body in Mumbai. My practice spans architectural design, interior design, and green building — with a particular interest in how buildings can be both deeply responsive to their environment and genuinely built to last.
+          </p>
+          <blockquote class="bio-quote">
+            "Architecture should speak of its time and place, but yearn for timelessness."
+          </blockquote>
+          <p class="bio-text">
+            My path into practice has been shaped by varied internships — from green building certification work at Sassan Gir forest to competition design with established Mumbai practices — alongside active involvement in NASA India, where I served on the executive board as Unit Secretary. I believe the early years of a career are for breadth: absorbing as many ways of working and thinking as possible before the work begins to find its own direction.
+          </p>
+        </div>
+
+        <!-- Education -->
+        <div class="cv-section reveal">
+          <h3 class="cv-title">Education</h3>
+          <div class="cv-grid reveal-stagger">
+            <div class="cv-year">2019 — 2024</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Bachelor of Architecture (B.Arch)</div>
+              <div class="cv-entry-sub">Aditya College of Architecture, University of Mumbai</div>
+              <div class="cv-entry-detail">Maharashtra, India</div>
+            </div>
+            <div class="cv-year">Prior</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Higher Secondary — Science</div>
+              <div class="cv-entry-sub">St. Xavier's College</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="cv-section reveal">
+          <h3 class="cv-title">Experience</h3>
+          <div class="cv-grid reveal-stagger">
+            <div class="cv-year">Oct 2024 — Present</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Junior Architect &amp; Medical Planner</div>
+              <div class="cv-entry-sub">Language.Architecture.Body</div>
+              <div class="cv-entry-detail">Mumbai Metropolitan Region</div>
+            </div>
+            <div class="cv-year">Jan 2023 — Apr 2023</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Architectural Intern</div>
+              <div class="cv-entry-sub">Amar Tendulkar Architects</div>
+              <div class="cv-entry-detail">Mumbai, Maharashtra</div>
+            </div>
+            <div class="cv-year">Nov 2022 — Dec 2022</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Architectural Intern</div>
+              <div class="cv-entry-sub">SSA Architects</div>
+              <div class="cv-entry-detail">Mumbai Metropolitan Region</div>
+            </div>
+            <div class="cv-year">May 2022 — Jun 2022</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Summer Project Intern</div>
+              <div class="cv-entry-sub">Studio of Ar. Shruti Pandit</div>
+              <div class="cv-entry-detail">Green building projects — including on-site certification work for Woods at Sassan Gir Forest, Gujarat</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leadership & Certifications -->
+        <div class="cv-section reveal">
+          <h3 class="cv-title">Leadership &amp; Certifications</h3>
+          <div class="cv-grid reveal-stagger">
+            <div class="cv-year">2024</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Registered Architect</div>
+              <div class="cv-entry-sub">Council of Architecture, India</div>
+            </div>
+            <div class="cv-year">2024</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">IGBC Accredited Professional</div>
+              <div class="cv-entry-sub">Indian Green Building Council</div>
+              <div class="cv-entry-detail">Sustainable design and green building certification</div>
+            </div>
+            <div class="cv-year">Jun 2021 — Jun 2022</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Executive Board — Unit Secretary</div>
+              <div class="cv-entry-sub">National Association of Students of Architecture (NASA India)</div>
+              <div class="cv-entry-detail">Represented the college unit in national competitions and official correspondence; organised events and fostered participation across all NASA India platforms</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Areas of Practice -->
+        <div class="cv-section reveal">
+          <h3 class="cv-title">Areas of Practice</h3>
+          <div class="cv-grid reveal-stagger">
+            <div class="cv-year">Current</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Medical Planning &amp; Healthcare Architecture</div>
+              <div class="cv-entry-sub">Language.Architecture.Body, Mumbai</div>
+              <div class="cv-entry-detail">Spatial programming, clinical workflows, and regulatory compliance</div>
+            </div>
+            <div class="cv-year">Freelance</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Architectural &amp; Interior Design</div>
+              <div class="cv-entry-sub">Independent practice</div>
+              <div class="cv-entry-detail">Residential interiors, design development, and documentation</div>
+            </div>
+            <div class="cv-year">Specialisation</div>
+            <div class="cv-entry">
+              <div class="cv-entry-title">Green Building &amp; Sustainable Design</div>
+              <div class="cv-entry-sub">IGBC Accredited Professional</div>
+              <div class="cv-entry-detail">Rating systems, site-level certification, and environmentally responsive design</div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>© 2025 Palak Joshi</span>
+      <div class="footer-right">
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://www.linkedin.com/in/ar-palak-joshi-b5a830193/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

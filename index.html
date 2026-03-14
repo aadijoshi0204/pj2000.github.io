@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Palak Joshi — Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── Hero Layout ────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Thin architectural grid lines */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    /* Radial fade to hide grid at center */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, var(--bg) 30%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.6s forwards;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.85s forwards;
+    }
+    .hero-name .first { display: block; }
+    .hero-name .last  {
+      display: block;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 1.2s forwards;
+    }
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      width: 48px; height: 1px;
+      background: var(--border);
+    }
+    .hero-divider span {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .hero-desc {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 540px;
+      margin: 0 auto 3.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.35s forwards;
+    }
+
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 1.6s forwards;
+    }
+    .hero-nav a {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.6rem 1.6rem;
+      border: 1px solid var(--border);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .hero-nav a:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+    .hero-nav .sep {
+      color: var(--border);
+      font-size: 0.7rem;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 2s forwards;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--border), transparent);
+      animation: scrollLine 2s ease infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      50.01% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── Preview Section ────────────────────────── */
+    .preview {
+      padding: 0 3rem 6rem;
+    }
+    .preview-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    .preview-card {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+    .preview-card:hover { background: var(--white); }
+    .preview-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .preview-card:hover::before { width: 100%; }
+
+    .preview-card a {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 0.5rem;
+    }
+    .card-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .preview-card:hover .card-title { color: var(--accent); }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 0.5rem;
+    }
+    .card-arrow {
+      margin-top: auto;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s, gap 0.3s;
+    }
+    .preview-card:hover .card-arrow {
+      color: var(--text);
+      gap: 0.8rem;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .preview { padding: 0 1.5rem 4rem; }
+      .preview-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .hero-nav { flex-direction: column; gap: 0.8rem; }
+      .hero-nav .sep { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">PJ</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="themes.html">Themes</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Architect &nbsp;·&nbsp; Designer &nbsp;·&nbsp; Thinker</p>
+        <h1 class="hero-name">
+          <span class="first">Palak</span>
+          <span class="last">Joshi</span>
+        </h1>
+        <div class="hero-divider">
+          <span>Architect &nbsp;·&nbsp; IGBC AP &nbsp;·&nbsp; Design Freelancer</span>
+        </div>
+        <p class="hero-desc">
+          Designing spaces where precision meets poetry — rooted in light, material, and the human experience.
+        </p>
+        <nav class="hero-nav" aria-label="Quick navigation">
+          <a href="about.html">About</a>
+          <span class="sep">·</span>
+          <a href="projects.html">Projects</a>
+          <span class="sep">·</span>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Preview cards -->
+    <section class="preview">
+      <div class="preview-inner">
+        <div class="preview-grid reveal-stagger">
+
+          <div class="preview-card">
+            <a href="about.html">
+              <span class="card-label">01 — Identity</span>
+              <h2 class="card-title">Profile &amp; Credentials</h2>
+              <p class="card-desc">B.Arch, Aditya College · IGBC AP · Language.Architecture.Body, Mumbai</p>
+              <span class="card-arrow">View About &nbsp;→</span>
+            </a>
+          </div>
+
+          <div class="preview-card">
+            <a href="projects.html">
+              <span class="card-label">02 — Work</span>
+              <h2 class="card-title">Selected Projects</h2>
+              <p class="card-desc">Residential, cultural, adaptive reuse — across South Asia.</p>
+              <span class="card-arrow">View Projects &nbsp;→</span>
+            </a>
+          </div>
+
+          <div class="preview-card">
+            <a href="themes.html">
+              <span class="card-label">03 — Philosophy</span>
+              <h2 class="card-title">Design Themes</h2>
+              <p class="card-desc">Light, vernacular, threshold, and tectonic honesty.</p>
+              <span class="card-arrow">View Themes &nbsp;→</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>© 2025 Palak Joshi</span>
+      <div class="footer-right">
+        <a href="mailto:palakjoshi5213@gmail.com">palakjoshi5213@gmail.com</a>
+        <a href="https://www.linkedin.com/in/ar-palak-joshi-b5a830193/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div><!-- /page-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>
